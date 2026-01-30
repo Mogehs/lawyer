@@ -729,13 +729,13 @@ export default function SecretaryPage() {
                 </div>
               </div>
               <Select value={locale} onValueChange={(v) => setLocale(v as any)}>
-                <SelectTrigger data-testid="select-language" className="h-10 w-[120px] rounded-2xl">
+                <SelectTrigger data-testid="select-language" className="h-10 w-[130px] rounded-2xl">
                   <div className="flex items-center gap-2">
                     <Globe className="h-4 w-4 text-muted-foreground" />
-                    <SelectValue placeholder={locale === "ar" ? "\u0627\u0644\u0644\u063a\u0629" : "Language"} />
+                    <SelectValue />
                   </div>
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent align={locale === "ar" ? "end" : "start"}>
                   <SelectItem data-testid="option-language-en" value="en">
                     English
                   </SelectItem>
