@@ -686,57 +686,59 @@ export default function SecretaryPage() {
   return (
     <div className={`app-bg min-h-screen ${locale === "ar" ? "dir-rtl" : ""} ${isDark ? "dark" : ""}`}>
       <div className="mx-auto max-w-[1320px] px-4 py-3 lg:px-6">
-        <header className="mb-5 mt-2 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/10 text-primary">
-              <Wallet className="h-5 w-5" />
-            </div>
-            <div>
-              <div data-testid="text-secretary-title" className="text-base font-semibold">
-                {t(locale, "secretaryWorkspace")}
+        <header className="sticky-blur sticky top-3 z-20 mb-5 mt-2 rounded-3xl border px-4 py-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/10 text-primary">
+                <Wallet className="h-5 w-5" />
               </div>
-              <div data-testid="text-secretary-subtitle" className="mt-0.5 text-sm text-muted-foreground">
-                {t(locale, "secretarySubtitle")}
+              <div>
+                <div data-testid="text-secretary-title" className="text-base font-semibold">
+                  {t(locale, "secretaryWorkspace")}
+                </div>
+                <div data-testid="text-secretary-subtitle" className="mt-0.5 text-sm text-muted-foreground">
+                  {t(locale, "secretarySubtitle")}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex items-center gap-2">
-            <div className="hidden items-center gap-2 md:flex">
-              <div className="relative">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  data-testid="input-search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder={locale === "ar" ? "بحث..." : "Search payments, cases, sessions..."}
-                  className="h-10 w-[320px] rounded-2xl pl-9"
-                />
+            <div className="flex items-center gap-2">
+              <div className="hidden items-center gap-2 md:flex">
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    data-testid="input-search"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder={locale === "ar" ? "بحث..." : "Search payments, cases, sessions..."}
+                    className="h-10 w-[320px] rounded-2xl pl-9"
+                  />
+                </div>
               </div>
-            </div>
-            <Button data-testid="button-notifications" variant="secondary" className="rounded-2xl">
-              <Bell className="h-4 w-4" />
-            </Button>
-            <Link href="/login">
-              <Button data-testid="button-back-login" variant="secondary" className="rounded-2xl">
-                Back
+              <Button data-testid="button-notifications" variant="secondary" className="rounded-2xl">
+                <Bell className="h-4 w-4" />
               </Button>
-            </Link>
+              <Link href="/login">
+                <Button data-testid="button-back-login" variant="secondary" className="rounded-2xl">
+                  Back
+                </Button>
+              </Link>
+            </div>
           </div>
         </header>
 
         <div className="flex gap-5">
           <aside className="hidden h-[calc(100vh-24px)] w-[280px] shrink-0 lg:block">
-            <div className="card-surface h-full rounded-3xl p-4">
-              <div className="flex items-center justify-between px-2 py-2">
-                <div>
-                  <div className="text-sm font-semibold">Secretary Dashboard</div>
-                  <div className="mt-1 text-xs text-muted-foreground">Operations & front desk</div>
+            <div className="card-surface sticky top-3 h-[calc(100vh-24px)] rounded-3xl p-4">
+              <div className="sticky-blur -mx-4 -mt-4 mb-3 rounded-t-3xl border-b px-4 pb-3 pt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-sm font-semibold">Secretary Dashboard</div>
+                    <div className="mt-1 text-xs text-muted-foreground">Operations & front desk</div>
+                  </div>
+                  <Pill tone="accent" text="UI" testId="badge-mode" />
                 </div>
-                <Pill tone="accent" text="UI" testId="badge-mode" />
               </div>
-
-              <Separator className="my-4" />
 
               <div className="space-y-1">
                 <button

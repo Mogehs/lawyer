@@ -121,15 +121,21 @@
   }
 
   .card-surface {
-    background: hsl(var(--card) / 0.92);
-    border: 1px solid hsl(var(--border) / 1);
+    background: hsl(var(--card) / 0.88);
+    border: 1px solid hsl(var(--border) / 0.95);
     box-shadow:
       0 1px 0 hsl(222 25% 10% / 0.04),
-      0 16px 40px hsl(222 25% 10% / 0.06);
+      0 14px 36px hsl(222 25% 10% / 0.08);
+    backdrop-filter: blur(10px);
   }
 
   .card-surface-dark {
-    background: hsl(var(--card) / 0.85);
+    background: hsl(var(--card) / 0.82);
+  }
+
+  .sticky-blur {
+    background: hsl(var(--background) / 0.72);
+    backdrop-filter: blur(14px);
   }
 
   .focus-ring {
