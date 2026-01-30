@@ -1,3 +1,5 @@
+import { useMemo, useSyncExternalStore } from "react";
+
 import type { Locale } from "./i18n";
 
 export type Role =
@@ -10,26 +12,65 @@ export type Role =
 
 type UiState = {
   locale: Locale;
-  setLocale: (l: Locale) => void;
   role: Role | null;
-  setRole: (r: Role | null) => void;
   isDark: boolean;
+};
+
+type UiStore = UiState & {
+  setLocale: (l: Locale) => void;
+  setRole: (r: Role | null) => void;
   setIsDark: (v: boolean) => void;
 };
 
-let state: UiState = {
+let store: UiStore = {
   locale: "en",
-  setLocale: () => {},
   role: "secretary",
-  setRole: () => {},
   isDark: false,
-  setIsDark: () => {},
+  setLocale: (l) => {
+    store = { ...store, locale: l };
+    emit();
+  },
+  setRole: (r) => {
+    store = { ...store, role: r };
+    emit();
+  },
+  setIsDark: (v) => {
+    store = { ...store, isDark: v };
+    emit();
+  },
 };
+
+const listeners = new Set<() => void>();
+
+function emit() {
+  listeners.forEach((l) => l());
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function getSnapshot() {
+  return store;
+}
 
 export function UiStateProvider({ children }: { children: any }) {
   return children;
 }
 
 export function useUiState() {
-  return state;
+  const snap = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+
+  return useMemo(
+    () => ({
+      locale: snap.locale,
+      setLocale: snap.setLocale,
+      role: snap.role,
+      setRole: snap.setRole,
+      isDark: snap.isDark,
+      setIsDark: snap.setIsDark,
+    }),
+    [snap]
+  );
 }
