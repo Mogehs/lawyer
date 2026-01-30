@@ -37,6 +37,7 @@ type SignatureItem = {
   paymentStatus: "PAID" | "UNPAID";
   approvalStatus: "Approved" | "Pending" | "Changes requested";
   memoReady: boolean;
+  memoFiles: string[];
   signed: boolean;
 };
 
@@ -48,6 +49,7 @@ const seed: SignatureItem[] = [
     paymentStatus: "PAID",
     approvalStatus: "Approved",
     memoReady: true,
+    memoFiles: ["approved-memo-CASE-2026-0103.pdf", "supporting-attachments.zip"],
     signed: false,
   },
   {
@@ -57,6 +59,7 @@ const seed: SignatureItem[] = [
     paymentStatus: "PAID",
     approvalStatus: "Pending",
     memoReady: true,
+    memoFiles: ["memo-awaiting-approval-CASE-2026-0091.pdf"],
     signed: false,
   },
   {
@@ -66,6 +69,7 @@ const seed: SignatureItem[] = [
     paymentStatus: "UNPAID",
     approvalStatus: "Approved",
     memoReady: true,
+    memoFiles: ["approved-memo-CASE-2026-0060.pdf"],
     signed: false,
   },
 ];
@@ -157,6 +161,33 @@ function SignModal({
               <div className="font-mono text-xs text-muted-foreground">{item.caseId}</div>
               <div className="mt-1 text-sm font-semibold">{item.client}</div>
               <div className="mt-1 text-sm text-muted-foreground">{item.id}</div>
+            </div>
+
+            <div className="rounded-2xl border bg-card/60 p-4">
+              <div className="text-sm font-semibold">{locale === "ar" ? "الوثائق" : "Documents"}</div>
+              <div className="mt-1 text-sm text-muted-foreground">
+                {locale === "ar" ? "ملفات المذكرة الجاهزة للتوقيع (واجهة)." : "Memorandum package ready for signature (UI mock)."}
+              </div>
+              <div className="mt-3 grid gap-2">
+                {item.memoFiles.length === 0 ? (
+                  <div data-testid="text-no-memo-files" className="text-sm text-muted-foreground">
+                    {locale === "ar" ? "لا توجد ملفات." : "No files."}
+                  </div>
+                ) : (
+                  item.memoFiles.map((f, idx) => (
+                    <div
+                      key={`${f}-${idx}`}
+                      data-testid={`row-memo-file-${idx}`}
+                      className="flex items-center justify-between rounded-xl border bg-card/70 px-3 py-2 text-sm"
+                    >
+                      <span className="truncate">{f}</span>
+                      <Button data-testid={`button-view-memo-file-${idx}`} variant="secondary" className="h-8 rounded-xl px-3">
+                        {locale === "ar" ? "عرض" : "View"}
+                      </Button>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
 
             <div className="rounded-2xl border bg-muted/40 p-4 text-sm text-muted-foreground">
