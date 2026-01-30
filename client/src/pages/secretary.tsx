@@ -740,7 +740,7 @@ export default function SecretaryPage() {
                     English
                   </SelectItem>
                   <SelectItem data-testid="option-language-ar" value="ar">
-                    \u0627\u0644\u0639\u0631\u0628\u064a\u0629
+                    العربية
                   </SelectItem>
                 </SelectContent>
               </Select>
