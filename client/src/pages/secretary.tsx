@@ -732,7 +732,7 @@ export default function SecretaryPage() {
                 <SelectTrigger data-testid="select-language" className="h-10 w-[130px] rounded-2xl">
                   <div className="flex items-center gap-2">
                     <Globe className="h-4 w-4 text-muted-foreground" />
-                    <SelectValue />
+                    <span className="text-sm">{locale === "ar" ? "العربية" : "English"}</span>
                   </div>
                 </SelectTrigger>
                 <SelectContent align={locale === "ar" ? "end" : "start"}>
