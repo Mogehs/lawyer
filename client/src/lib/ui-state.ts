@@ -8,7 +8,8 @@ export type Role =
   | "approvingLawyer"
   | "partner"
   | "legalSecretary"
-  | "accountant";
+  | "accountant"
+  | "automationLawyer";
 
 type UiState = {
   locale: Locale;
