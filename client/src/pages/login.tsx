@@ -25,6 +25,8 @@ function roleToLabelKey(role: Role) {
       return "roleLegalSecretary";
     case "accountant":
       return "roleAccountant";
+    case "automationLawyer":
+      return "roleAutomationLawyer";
   }
 }
 
@@ -131,6 +133,9 @@ export default function LoginPage() {
                       <SelectItem data-testid="role-accountant" value="accountant">
                         {t(locale, roleToLabelKey("accountant"))}
                       </SelectItem>
+                      <SelectItem data-testid="role-automation" value="automationLawyer">
+                        {t(locale, roleToLabelKey("automationLawyer"))}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -168,7 +173,23 @@ export default function LoginPage() {
                   </div>
                 </div>
 
-                <Link href="/secretary">
+                <Link
+                  href={
+                    role === "draftingLawyer"
+                      ? "/drafting-lawyer"
+                      : role === "approvingLawyer"
+                        ? "/approving-lawyer"
+                        : role === "partner"
+                          ? "/managing-partner"
+                          : role === "legalSecretary"
+                            ? "/legal-secretary"
+                            : role === "accountant"
+                              ? "/accountant"
+                              : role === "automationLawyer"
+                                ? "/automation-lawyer"
+                                : "/secretary"
+                  }
+                >
                   <Button data-testid="button-continue" className="h-11 w-full rounded-2xl">
                     {t(locale, "continue")}
                   </Button>
