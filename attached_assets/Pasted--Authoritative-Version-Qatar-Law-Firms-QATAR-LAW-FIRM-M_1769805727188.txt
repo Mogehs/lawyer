@@ -1,0 +1,239 @@
+(Authoritative Version – Qatar Law Firms)
+
+QATAR LAW FIRM MANAGEMENT SYSTEM
+MASTER IMPLEMENTATION GUIDE FOR DEVELOPMENT TEAM
+
+This document defines the ONLY accepted workflow.
+It reflects real law firm operations in the State of Qatar.
+No assumptions. No shortcuts. No generic CRM logic.
+
+
+
+
+1. CORE PRINCIPLES (NON-NEGOTIABLE)
+
+• Payment may occur BEFORE case creation
+• invoice 🧾 first to creat by secretary 
+• Lawyers NEVER sign memorandums
+• Managing Partner is the ONLY legal signer
+• Approving Lawyer approval is mandatory before signature
+• Not every session or stage requires a memorandum
+• Some sessions require documents only
+• No court session without official submission
+• WhatsApp is the primary client communication channel
+• Full audit trail is mandatory
+• System must support 1 or 2 secretaries per office
+
+⸻
+
+2. USER ROLES & DASHBOARDS (STRICT SEPARATION)
+
+A. Secretary (Front Desk / Operations)
+	•	Collect payments (pre-case or per stage)
+	•	Create payment record BEFORE case exists
+	•	Open case ONLY after payment confirmation
+	•	Upload POA and client documents
+	•	Assign:
+	•	Drafting Lawyer
+	•	Approving Lawyer
+	•	Record final decisions
+	•	Close cases
+	•	Archive cases
+	•	Send WhatsApp messages (manual & automated)
+
+❌ Cannot draft
+❌ Cannot approve legally
+❌ Cannot sign
+
+⸻
+
+B. Drafting Lawyer
+	•	Draft memorandums (when required)
+	•	Upload supporting documents
+	•	Edit drafts until approval
+	•	Submit draft for approval
+
+❌ Cannot approve
+❌ Cannot sign
+❌ Cannot submit to court
+
+⸻
+
+C. Approving Lawyer (Senior / Proving Lawyer)
+	•	Review legal content
+	•	Approve or reject memorandums
+	•	Decide per session/stage:
+	•	Documents only
+	•	Memorandum required
+	•	Both
+	•	Request revisions
+
+❌ Cannot sign
+❌ Cannot submit
+
+⸻
+
+D. Managing Partner / Owner
+	•	Review approved memorandums
+	•	Apply the ONLY legal signature
+	•	Lock signed documents permanently
+	•	Reject and return for revision
+	•	View analytics & reports
+
+⸻
+
+E. Legal Secretary (Court Handling)
+	•	Submit signed documents to:
+	•	Court portals
+	•	Prosecution portals
+	•	Enter:
+	•	Reference number
+	•	Submission date
+	•	Upload official proof (PDF)
+
+❌ Cannot submit unsigned documents
+
+⸻
+
+F. Accountant
+	•	Payments
+	•	Invoices
+	•	Financial reports only
+
+⸻
+
+G. System (Automation Layer)
+	•	Enforce workflow rules
+	•	Lock/unlock stages
+	•	Trigger WhatsApp reminders
+	•	Notify employees
+	•	Maintain audit logs
+	•	Block illegal actions automatically
+
+⸻
+
+3. PAYMENT LOGIC (IMPORTANT CORRECTION)
+
+❌ NO payment per memorandum by default
+
+✅ Payment is:
+	•	Per CASE STAGE
+	•	Per SESSION
+	•	Additional payment can be added anytime for the same case
+
+Examples:
+	•	First Instance stage → payment
+	•	Appeal stage → new payment
+	•	Enforcement → new payment
+	•	Extra work → additional payment linked to stage/session
+
+System rules:
+
+IF payment_status != PAID
+BLOCK next workflow step
+
+
+
+
+4. CASE & SESSION LOGIC (REAL PRACTICE)
+
+Sessions
+	•	A case can have multiple sessions
+	•	A session may:
+	•	Be extended
+	•	Be adjourned
+	•	Require documents only
+	•	Require a new memorandum
+
+Memorandum Rules
+	•	NOT every session requires a memorandum
+	•	Approving Lawyer decides
+	•	New memorandum ONLY if legally required
+	•	Old memorandums remain read-only
+
+⸻
+
+5. END-TO-END WORKFLOW
+	1.	Payment collected (even before case)
+	2.	Case created
+	3.	Stage selected
+	4.	Drafting Lawyer prepares (if required)
+	5.	Approving Lawyer approves
+	6.	Managing Partner signs (if memo exists)
+	7.	Legal Secretary submits to portal
+	8.	Reference number recorded
+	9.	System unlocks session
+	10.	Session occurs / extended
+	11.	Lawyer records outcome
+	12.	Secretary records decision
+	13.	Case closed
+	14.	System archives (read-only)
+
+⸻
+
+6. JUDICIAL STAGES (QATAR)
+
+Each stage generates a NEW reference number:
+	•	Prosecution
+	•	Investigation
+	•	First Instance
+	•	Appeal
+	•	Cassation (Tamyeez)
+	•	Enforcement
+
+⸻
+
+7. WHATSAPP & NOTIFICATIONS
+
+Client Notifications
+	•	Payment confirmation
+	•	Submission confirmation
+	•	Session date
+	•	Session result
+	•	Decision update
+
+Employee Notifications
+	•	New task assigned
+	•	Approval required
+	•	Signature required
+	•	Upcoming session reminders
+
+System must support:
+	•	Automated messages
+	•	Manual messages
+	•	WhatsApp API already available
+
+⸻
+
+8. REPORTING (MANDATORY)
+
+Per Case
+	•	Timeline
+	•	Sessions
+	•	Payments
+	•	Decisions
+	•	Documents
+	•	WhatsApp history
+	•	Audit log
+
+Monthly / Annual
+	•	Revenue
+	•	Case count
+	•	Lawyer workload
+	•	Stage distribution
+
+Export:
+	•	PDF
+	•	Excel
+
+9. ARCHIVING
+
+Conditions:
+	•	Final decision recorded
+	•	No open sessions
+	•	Case closed
+
+Archive:
+	•	Permanent
+	•	Read-only
+	•	Full history preserved
