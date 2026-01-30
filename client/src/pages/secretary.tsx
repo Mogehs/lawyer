@@ -5,10 +5,12 @@ import {
   BadgeCheck,
   Bell,
   CheckCircle2,
+  ChevronDown,
   ClipboardList,
   FileText,
   Filter,
   Gavel,
+  Globe,
   Lock,
   MessageSquare,
   Plus,
@@ -357,7 +359,7 @@ function SideLink({
 }
 
 export default function SecretaryPage() {
-  const { locale, isDark } = useUiState();
+  const { locale, setLocale, isDark } = useUiState();
   const [section, setSection] = useState<
     "overview" | "payments" | "cases" | "sessions" | "documents" | "whatsapp" | "tasks" | "audit"
   >("overview");
@@ -726,12 +728,29 @@ export default function SecretaryPage() {
                   />
                 </div>
               </div>
+              <Select value={locale} onValueChange={(v) => setLocale(v as any)}>
+                <SelectTrigger data-testid="select-language" className="h-10 w-[120px] rounded-2xl">
+                  <div className="flex items-center gap-2">
+                    <Globe className="h-4 w-4 text-muted-foreground" />
+                    <SelectValue placeholder={locale === "ar" ? "\u0627\u0644\u0644\u063a\u0629" : "Language"} />
+                  </div>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem data-testid="option-language-en" value="en">
+                    English
+                  </SelectItem>
+                  <SelectItem data-testid="option-language-ar" value="ar">
+                    \u0627\u0644\u0639\u0631\u0628\u064a\u0629
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+
               <Button data-testid="button-notifications" variant="secondary" className="rounded-2xl">
                 <Bell className="h-4 w-4" />
               </Button>
               <Link href="/login">
                 <Button data-testid="button-back-login" variant="secondary" className="rounded-2xl">
-                  Back
+                  {ts(locale, "back")}
                 </Button>
               </Link>
             </div>
