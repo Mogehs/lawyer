@@ -39,6 +39,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 
 import { t } from "@/lib/i18n";
+import { ts } from "@/lib/secretary-i18n";
 import { useUiState } from "@/lib/ui-state";
 
 type PaymentStatus = "PAID" | "UNPAID";
@@ -720,7 +721,7 @@ export default function SecretaryPage() {
                     data-testid="input-search"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder={locale === "ar" ? "بحث..." : "Search payments, cases, sessions..."}
+                    placeholder={ts(locale, "searchPlaceholder")}
                     className="h-10 w-[320px] rounded-2xl pl-9"
                   />
                 </div>
@@ -743,8 +744,8 @@ export default function SecretaryPage() {
               <div className="sticky-blur -mx-4 -mt-4 mb-3 rounded-t-3xl border-b px-4 pb-3 pt-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-semibold">Secretary Dashboard</div>
-                    <div className="mt-1 text-xs text-muted-foreground">Operations & front desk</div>
+                    <div className="text-sm font-semibold">{ts(locale, "secTitle")}</div>
+                    <div className="mt-1 text-xs text-muted-foreground">{ts(locale, "secSubtitle")}</div>
                   </div>
                   <Pill tone="accent" text="UI" testId="badge-mode" />
                 </div>
@@ -766,7 +767,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <ClipboardList className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">Overview</span>
+                    <span className="font-medium">{ts(locale, "navOverview")}</span>
                   </div>
                 </button>
 
@@ -781,7 +782,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <Wallet className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">Payments</span>
+                    <span className="font-medium">{ts(locale, "navPayments")}</span>
                   </div>
                 </button>
 
@@ -796,7 +797,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <Gavel className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">Cases</span>
+                    <span className="font-medium">{ts(locale, "navCases")}</span>
                   </div>
                 </button>
 
@@ -811,7 +812,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <FileText className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">Sessions</span>
+                    <span className="font-medium">{ts(locale, "navSessions")}</span>
                   </div>
                 </button>
 
@@ -826,7 +827,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <Upload className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">Documents</span>
+                    <span className="font-medium">{ts(locale, "navDocuments")}</span>
                   </div>
                 </button>
 
@@ -841,7 +842,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <CheckCircle2 className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">Tasks</span>
+                    <span className="font-medium">{ts(locale, "navTasks")}</span>
                   </div>
                 </button>
 
@@ -856,7 +857,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <MessageSquare className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">WhatsApp</span>
+                    <span className="font-medium">{ts(locale, "navWhatsApp")}</span>
                   </div>
                 </button>
 
@@ -871,7 +872,7 @@ export default function SecretaryPage() {
                     <span className="grid h-9 w-9 place-items-center rounded-xl border bg-card/60 text-foreground/80">
                       <ShieldCheck className="h-4 w-4" />
                     </span>
-                    <span className="font-medium">Audit</span>
+                    <span className="font-medium">{ts(locale, "navAudit")}</span>
                   </div>
                 </button>
               </div>
@@ -916,7 +917,7 @@ export default function SecretaryPage() {
                       data-testid="input-search-mobile"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder={locale === "ar" ? "بحث..." : "Search payments, cases, sessions..."}
+                      placeholder={ts(locale, "searchPlaceholder")}
                       className="h-11 w-full rounded-2xl pl-9 sm:w-[320px]"
                     />
                   </div>
