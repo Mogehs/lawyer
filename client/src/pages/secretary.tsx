@@ -662,11 +662,21 @@ export default function SecretaryPage() {
   }
 
   function recordSessionOutcome(sessionId: string, outcome: string, status: SessionRecord["status"]) {
+    const current = sessions.find((x) => x.id === sessionId);
+    if (!current) return;
+
+    const needsSubmission = current.submissionRequired;
+    const hasProof = (current.submissionProofFiles ?? []).length > 0;
+
+    if (needsSubmission && !hasProof) {
+      addAudit("Blocked: session outcome requires submission proof", sessionId);
+      return;
+    }
+
     setSessions((ss) => ss.map((x) => (x.id === sessionId ? { ...x, outcome, status } : x)));
     addAudit("Recorded session outcome", sessionId);
 
-    const s = sessions.find((x) => x.id === sessionId);
-    const c = s ? cases.find((x) => x.id === s.caseId) : null;
+    const c = cases.find((x) => x.id === current.caseId) ?? null;
     if (c) {
       addWhatsApp("Session result", c.client, c.clientPhone, "Manual", `Session update (${sessionId}): ${outcome}`);
     }
