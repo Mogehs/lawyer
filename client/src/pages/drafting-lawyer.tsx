@@ -461,15 +461,63 @@ export default function DraftingLawyerPage() {
                           />
                         )}
 
-                        <Button
-                          data-testid={`button-message-client-${x.id}`}
-                          variant="secondary"
-                          className="h-10 rounded-2xl"
-                          onClick={() => {}}
-                        >
-                          <MessageSquare className="mr-2 h-4 w-4" />
-                          {locale === "ar" ? "رسالة" : "Message"}
-                        </Button>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button
+                              data-testid={`button-message-client-${x.id}`}
+                              variant="secondary"
+                              className="h-10 rounded-2xl"
+                            >
+                              <MessageSquare className="mr-2 h-4 w-4" />
+                              {locale === "ar" ? "رسالة" : "Message"}
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-[720px] rounded-3xl p-6">
+                            <DialogHeader>
+                              <DialogTitle className="text-left">
+                                {locale === "ar" ? "رسالة للعميل" : "Message client"}
+                              </DialogTitle>
+                            </DialogHeader>
+                            <div className="grid gap-3">
+                              <div className="rounded-2xl border bg-card/70 p-4">
+                                <div className="font-mono text-xs text-muted-foreground">{x.caseId}</div>
+                                <div className="mt-1 text-sm font-semibold">{x.client}</div>
+                                <div className="mt-1 text-sm text-muted-foreground">
+                                  {locale === "ar" ? "ملاحظة: واجهة فقط" : "Note: UI mock only"}
+                                </div>
+                              </div>
+                              <div className="rounded-2xl border bg-muted/40 p-4 text-sm text-muted-foreground">
+                                <div className="flex items-start gap-2">
+                                  <ShieldCheck className="mt-0.5 h-4 w-4" />
+                                  <div>
+                                    <div className="font-semibold text-foreground">{locale === "ar" ? "قاعدة" : "Rule"}</div>
+                                    <div className="mt-1">
+                                      {locale === "ar"
+                                        ? "يتم التواصل مع العميل دون مشاركة مستندات حساسة. لا توقيع هنا."
+                                        : "Client comms only. No sensitive attachments shared. No signing here."}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="grid gap-2">
+                                <Label data-testid={`label-message-${x.id}`}>{locale === "ar" ? "نص الرسالة" : "Message"}</Label>
+                                <Textarea
+                                  data-testid={`textarea-message-${x.id}`}
+                                  className="min-h-[140px] rounded-2xl"
+                                  placeholder={locale === "ar" ? "اكتب الرسالة..." : "Write message..."}
+                                />
+                              </div>
+                            </div>
+                            <DialogFooter className="mt-4">
+                              <Button data-testid={`button-close-message-${x.id}`} variant="secondary" className="rounded-2xl">
+                                {ts(locale, "modalCancel")}
+                              </Button>
+                              <Button data-testid={`button-send-message-${x.id}`} className="rounded-2xl">
+                                {locale === "ar" ? "إرسال" : "Send"}
+                              </Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
                       </div>
                     </div>
 

@@ -153,4 +153,14 @@
   .dir-rtl {
     direction: rtl;
   }
+
+  .dir-rtl .pl-9 {
+    padding-left: 0 !important;
+    padding-right: 2.25rem !important;
+  }
+
+  .dir-rtl .left-3 {
+    left: auto !important;
+    right: 0.75rem !important;
+  }
 }

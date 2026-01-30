@@ -49,6 +49,7 @@ type ApprovalItem = {
   paymentStatus: "PAID" | "UNPAID";
   poaUploaded: boolean;
   draftProvided: boolean;
+  draftFiles: string[];
   decision: "Approve" | "Request changes" | "Reject" | null;
   notes?: string;
   status: "Pending" | "Completed";
@@ -63,6 +64,7 @@ const seed: ApprovalItem[] = [
     paymentStatus: "PAID",
     poaUploaded: true,
     draftProvided: true,
+    draftFiles: ["memo-draft-CASE-2026-0103.pdf", "attachments-index.txt"],
     decision: null,
     status: "Pending",
   },
@@ -74,6 +76,7 @@ const seed: ApprovalItem[] = [
     paymentStatus: "PAID",
     poaUploaded: false,
     draftProvided: true,
+    draftFiles: ["draft-notes-CASE-2026-0060.docx"],
     decision: null,
     status: "Pending",
   },
@@ -85,6 +88,7 @@ const seed: ApprovalItem[] = [
     paymentStatus: "UNPAID",
     poaUploaded: true,
     draftProvided: false,
+    draftFiles: [],
     decision: null,
     status: "Pending",
   },
@@ -195,6 +199,37 @@ function ApprovalModal({
               <div className="font-mono text-xs text-muted-foreground">{item.caseId}</div>
               <div className="mt-1 text-sm font-semibold">{item.client}</div>
               <div className="mt-1 text-sm text-muted-foreground">Stage: {item.stage} · {item.id}</div>
+            </div>
+
+            <div className="rounded-2xl border bg-card/60 p-4">
+              <div className="text-sm font-semibold">{locale === "ar" ? "ملفات المسودة" : "Draft files"}</div>
+              <div className="mt-1 text-sm text-muted-foreground">
+                {locale === "ar" ? "عرض الملفات المرفوعة من محامي الصياغة (واجهة)." : "Files uploaded by Drafting Lawyer (UI mock)."}
+              </div>
+              <div className="mt-3 grid gap-2">
+                {item.draftFiles.length === 0 ? (
+                  <div data-testid="text-no-draft-files" className="text-sm text-muted-foreground">
+                    {locale === "ar" ? "لا توجد ملفات." : "No files."}
+                  </div>
+                ) : (
+                  item.draftFiles.map((f, idx) => (
+                    <div
+                      key={`${f}-${idx}`}
+                      data-testid={`row-draft-file-${idx}`}
+                      className="flex items-center justify-between rounded-xl border bg-card/70 px-3 py-2 text-sm"
+                    >
+                      <span className="truncate">{f}</span>
+                      <Button
+                        data-testid={`button-view-draft-file-${idx}`}
+                        variant="secondary"
+                        className="h-8 rounded-xl px-3"
+                      >
+                        {locale === "ar" ? "عرض" : "View"}
+                      </Button>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
 
             <div className="grid gap-2">

@@ -297,7 +297,9 @@ export default function LegalSecretaryPage() {
                   {locale === "ar" ? "لوحة السكرتير القانوني" : "Legal Secretary Dashboard"}
                 </div>
                 <div data-testid="text-role-subtitle" className="mt-0.5 text-sm text-muted-foreground">
-                  {locale === "ar" ? "رفع الإيداعات وإثباتاتها بعد التوقيع." : "Portal submissions and proof uploads after signature."}
+                  {locale === "ar"
+                    ? "رفع الإيداعات عبر Portal وإرفاق إثبات الإيداع لفتح Session (بعد التوقيع)."
+                    : "Submit via the Portal and upload submission proof to unlock Sessions (after signature)."}
                 </div>
               </div>
             </div>

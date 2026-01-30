@@ -228,7 +228,9 @@ export default function AccountantPage() {
                   {locale === "ar" ? "لوحة المحاسب" : "Accountant Dashboard"}
                 </div>
                 <div data-testid="text-role-subtitle" className="mt-0.5 text-sm text-muted-foreground">
-                  {locale === "ar" ? "تسجيل الدفعات وإغلاق الفواتير." : "Record payments and close invoices."}
+                  {locale === "ar"
+                    ? "تسجيل الدفعات وتأكيد PAID (للسماح بفتح Case)."
+                    : "Record payments and confirm PAID (to unlock Case opening)."}
                 </div>
               </div>
             </div>
